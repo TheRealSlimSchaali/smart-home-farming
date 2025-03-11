@@ -1,0 +1,16 @@
+{
+    "domain": "smart_home_farming",
+    "name": "Smart Home Farming",
+    "config_flow": true,
+    "documentation": "https://github.com/TheRealSlimSchaali/smart-home-farming",
+    "issue_tracker": "https://github.com/TheRealSlimSchaali/smart-home-farming/issues",
+    "requirements": [
+        "google-generativeai>=0.3.0"
+    ],
+    "dependencies": [],
+    "codeowners": ["@TheRealSlimSchaali"],
+    "version": "1.0.0",
+    "iot_class": "cloud_polling",
+    "homeassistant": "2024.1.0",
+    "integration_type": "hub"
+}
