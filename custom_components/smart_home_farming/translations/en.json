@@ -1,0 +1,50 @@
+{
+    "config": {
+        "step": {
+            "user": {
+                "title": "Smart Home Farming Setup",
+                "description": "Set up your Smart Home Farming integration with your Google Gemini API key and garden location.",
+                "data": {
+                    "api_key": "Google Gemini API Key",
+                    "location": "Garden Location"
+                }
+            },
+            "add_bed": {
+                "title": "Add Garden Bed",
+                "description": "Configure your garden beds one by one. You currently have {beds_count} bed(s) configured. Add another bed or uncheck 'Add another bed' to finish.",
+                "data": {
+                    "bed_type": "Bed Type",
+                    "length": "Length (cm)",
+                    "width": "Width (cm)",
+                    "cold_frame": "Has Cold Frame Extension",
+                    "sunlight": "Sunlight Exposure",
+                    "add_another": "Add another bed"
+                }
+            }
+        },
+        "error": {
+            "cannot_connect": "Failed to connect",
+            "invalid_auth": "Invalid authentication",
+            "unknown": "Unexpected error"
+        },
+        "abort": {
+            "already_configured": "Device is already configured"
+        }
+    },
+    "options": {
+        "step": {
+            "add_bed": {
+                "title": "Modify Garden Beds",
+                "description": "Add or modify your garden beds. You currently have {beds_count} bed(s) configured. Add another bed or uncheck 'Add another bed' to finish.",
+                "data": {
+                    "bed_type": "Bed Type",
+                    "length": "Length (cm)",
+                    "width": "Width (cm)",
+                    "cold_frame": "Has Cold Frame Extension",
+                    "sunlight": "Sunlight Exposure",
+                    "add_another": "Add another bed"
+                }
+            }
+        }
+    }
+}
