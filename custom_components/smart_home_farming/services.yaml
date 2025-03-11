@@ -1,0 +1,84 @@
+# Service descriptions for Smart Home Farming
+
+generate_planting_plan:
+  name: Generate Planting Plan
+  description: Generate an AI-powered planting plan for your garden.
+  fields:
+    available_space:
+      name: Available Space
+      description: Description of your available garden space
+      required: true
+      example: "2x3 meters in Raised Bed 1"
+      selector:
+        text:
+          multiline: true
+    desired_plants:
+      name: Desired Plants
+      description: List of plants you want to grow
+      required: true
+      example: '["tomatoes", "basil", "lettuce"]'
+      selector:
+        object:
+    planting_date:
+      name: Planting Date
+      description: When you plan to start planting (optional)
+      required: false
+      example: "2024-04-01"
+      selector:
+        text:
+
+record_planting:
+  name: Record Planting
+  description: Record when you plant something in your garden.
+  fields:
+    plant:
+      name: Plant
+      description: Name of the plant
+      required: true
+      example: "tomatoes"
+      selector:
+        text:
+    location:
+      name: Location
+      description: Where in your garden you planted it
+      required: true
+      example: "Raised Bed 1"
+      selector:
+        text:
+    date:
+      name: Date
+      description: Planting date (optional)
+      required: false
+      example: "2024-04-01"
+      selector:
+        text:
+
+record_harvest:
+  name: Record Harvest
+  description: Record when you harvest something from your garden.
+  fields:
+    plant:
+      name: Plant
+      description: Name of the plant
+      required: true
+      example: "tomatoes"
+      selector:
+        text:
+    date:
+      name: Date
+      description: Harvest date (optional)
+      required: false
+      example: "2024-08-15"
+      selector:
+        text:
+    yield_amount:
+      name: Yield Amount
+      description: How much you harvested (optional)
+      required: false
+      example: "500g"
+      selector:
+        text:
+
+get_garden_status:
+  name: Get Garden Status
+  description: Get the current status of your garden, including all planting plans, planting records, and harvest records.

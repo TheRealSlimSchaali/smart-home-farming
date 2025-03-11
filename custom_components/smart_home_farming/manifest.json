@@ -11,7 +11,7 @@
     "codeowners": ["@TheRealSlimSchaali"],
     "version": "1.0.0",
     "iot_class": "cloud_polling",
-    "homeassistant": "2024.1.0",
     "integration_type": "hub",
+    "minimum_ha_version": "2024.1.0",
     "loggers": ["smart_home_farming"]
 }

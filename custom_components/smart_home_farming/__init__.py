@@ -22,6 +22,9 @@ _LOGGER = logging.getLogger(__name__)
 
 PLATFORMS = []
 
+# This integration only supports configuration via the UI
+CONFIG_SCHEMA = cv.config_entry_only_config_schema(DOMAIN)
+
 # Service schemas
 GENERATE_PLANTING_PLAN_SCHEMA = vol.Schema({
     vol.Required(CONF_AVAILABLE_SPACE): cv.string,
@@ -43,9 +46,7 @@ RECORD_HARVEST_SCHEMA = vol.Schema({
 
 async def async_setup(hass: HomeAssistant, config: dict) -> bool:
     """Set up the Smart Home Farming component."""
-    if DOMAIN in config:
-        hass.data.setdefault(DOMAIN, {})
-        hass.data[DOMAIN]["config"] = config[DOMAIN]
+    hass.data.setdefault(DOMAIN, {})
     return True
 
 async def async_setup_entry(hass: HomeAssistant, entry: ConfigEntry) -> bool:
