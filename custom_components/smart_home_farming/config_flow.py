@@ -21,6 +21,11 @@ class SmartHomeFarmingConfigFlow(config_entries.ConfigFlow, domain=DOMAIN):
     async def async_step_user(self, user_input=None):
         """Handle the initial step."""
         errors = {}
+        
+        # Get list of zones from Home Assistant
+        zones = self.hass.states.async_entity_ids("zone")
+        zone_names = [state.split(".")[1] for state in zones]
+        
         if user_input is not None:
             return self.async_create_entry(title="Smart Home Farming", data=user_input)
 
@@ -29,7 +34,7 @@ class SmartHomeFarmingConfigFlow(config_entries.ConfigFlow, domain=DOMAIN):
             data_schema=vol.Schema(
                 {
                     vol.Required(CONF_API_KEY): str,
-                    vol.Required(CONF_LOCATION): str,
+                    vol.Required(CONF_LOCATION): vol.In(zone_names),
                 }
             ),
             errors=errors,
@@ -52,6 +57,11 @@ class SmartHomeFarmingOptionsFlow(config_entries.OptionsFlow):
     async def async_step_init(self, user_input=None):
         """Manage the options."""
         errors = {}
+        
+        # Get list of zones from Home Assistant
+        zones = self.hass.states.async_entity_ids("zone")
+        zone_names = [state.split(".")[1] for state in zones]
+        
         if user_input is not None:
             return self.async_create_entry(title="", data=user_input)
 
@@ -60,7 +70,7 @@ class SmartHomeFarmingOptionsFlow(config_entries.OptionsFlow):
             data_schema=vol.Schema(
                 {
                     vol.Optional(CONF_API_KEY, default=self.config_entry.options.get(CONF_API_KEY, "")): str,
-                    vol.Optional(CONF_LOCATION, default=self.config_entry.options.get(CONF_LOCATION, "")): str,
+                    vol.Optional(CONF_LOCATION, default=self.config_entry.options.get(CONF_LOCATION, "")): vol.In(zone_names),
                 }
             ),
             errors=errors,
