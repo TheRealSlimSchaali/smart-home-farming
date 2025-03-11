@@ -3,5 +3,12 @@
     "render_readme": true,
     "country": ["US", "GB", "DE", "FR", "ES", "IT", "NL", "BE", "CH", "AT", "SE", "NO", "DK", "FI", "PT", "IE", "AU", "NZ"],
     "homeassistant": "2024.1.0",
-    "hacs": "1.6.0"
+    "hacs": "1.6.0",
+    "topics": [
+        "home-assistant",
+        "hacs",
+        "custom-component",
+        "garden",
+        "smart-garden"
+    ]
 }
