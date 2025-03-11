@@ -19,10 +19,36 @@ BED_TYPE_DEEP = "deep_bed"
 BED_TYPE_POT = "plant_pot"
 BED_TYPES = [BED_TYPE_RAISED, BED_TYPE_DEEP, BED_TYPE_POT]
 
+# Bed type translations
+BED_TYPE_TRANSLATIONS = {
+    "en": {
+        BED_TYPE_RAISED: "Raised Bed",
+        BED_TYPE_DEEP: "Deep Bed",
+        BED_TYPE_POT: "Plant Pot"
+    },
+    "de": {
+        BED_TYPE_RAISED: "Hochbeet",
+        BED_TYPE_DEEP: "Tiefbeet",
+        BED_TYPE_POT: "Pflanzkübel"
+    }
+}
+
 # Sunlight types
 SUNLIGHT_DIRECT = "direct"
 SUNLIGHT_INDIRECT = "indirect"
 SUNLIGHT_TYPES = [SUNLIGHT_DIRECT, SUNLIGHT_INDIRECT]
+
+# Sunlight type translations
+SUNLIGHT_TYPE_TRANSLATIONS = {
+    "en": {
+        SUNLIGHT_DIRECT: "Direct Sunlight",
+        SUNLIGHT_INDIRECT: "Indirect Sunlight"
+    },
+    "de": {
+        SUNLIGHT_DIRECT: "Direkte Sonne",
+        SUNLIGHT_INDIRECT: "Indirekte Sonne"
+    }
+}
 
 # Storage
 STORAGE_KEY = "garden_data"

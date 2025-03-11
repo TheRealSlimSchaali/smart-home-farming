@@ -18,6 +18,8 @@ from .const import (
     CONF_NAME,
     BED_TYPES,
     SUNLIGHT_TYPES,
+    BED_TYPE_TRANSLATIONS,
+    SUNLIGHT_TYPE_TRANSLATIONS
 )
 
 _LOGGER = logging.getLogger(__name__)
@@ -37,6 +39,15 @@ class SmartHomeFarmingConfigFlow(config_entries.ConfigFlow, domain=DOMAIN):
             "deep_bed": 0,
             "plant_pot": 0
         }
+
+    def _get_translated_types(self, type_translations):
+        """Get translated options based on user's language."""
+        # Get current language, fallback to English if not found
+        language = self.hass.config.language or "en"
+        language = language if language in type_translations else "en"
+        
+        # Create a dict of internal value to translated display value
+        return {k: type_translations[language][k] for k in type_translations[language]}
 
     async def async_step_user(self, user_input=None):
         """Handle the initial step."""
@@ -65,11 +76,15 @@ class SmartHomeFarmingConfigFlow(config_entries.ConfigFlow, domain=DOMAIN):
         """Handle adding a bed."""
         errors = {}
         
+        # Get translated options
+        bed_types = self._get_translated_types(BED_TYPE_TRANSLATIONS)
+        sunlight_types = self._get_translated_types(SUNLIGHT_TYPE_TRANSLATIONS)
+        
         if user_input is not None:
             if user_input.get("add_another", False):
                 bed_type = user_input[CONF_BED_TYPE]
                 self._bed_count[bed_type] += 1
-                name = f"{bed_type.replace('_', ' ').title()} {self._bed_count[bed_type]}"
+                name = f"{bed_types[bed_type]} {self._bed_count[bed_type]}"
                 
                 bed_data = {
                     CONF_NAME: name,
@@ -80,14 +95,13 @@ class SmartHomeFarmingConfigFlow(config_entries.ConfigFlow, domain=DOMAIN):
                     CONF_SUNLIGHT: user_input[CONF_SUNLIGHT],
                 }
                 self.beds.append(bed_data)
-                # Show the form again for another bed
                 return await self.async_step_add_bed()
             else:
                 # Add the last bed if data was provided
                 if CONF_BED_TYPE in user_input:
                     bed_type = user_input[CONF_BED_TYPE]
                     self._bed_count[bed_type] += 1
-                    name = f"{bed_type.replace('_', ' ').title()} {self._bed_count[bed_type]}"
+                    name = f"{bed_types[bed_type]} {self._bed_count[bed_type]}"
                     
                     bed_data = {
                         CONF_NAME: name,
@@ -107,11 +121,11 @@ class SmartHomeFarmingConfigFlow(config_entries.ConfigFlow, domain=DOMAIN):
             step_id="add_bed",
             data_schema=vol.Schema(
                 {
-                    vol.Required(CONF_BED_TYPE): vol.In(BED_TYPES),
+                    vol.Required(CONF_BED_TYPE): vol.In(bed_types),
                     vol.Required(CONF_LENGTH): vol.Coerce(int),
                     vol.Required(CONF_WIDTH): vol.Coerce(int),
                     vol.Required(CONF_COLD_FRAME, default=False): bool,
-                    vol.Required(CONF_SUNLIGHT): vol.In(SUNLIGHT_TYPES),
+                    vol.Required(CONF_SUNLIGHT): vol.In(sunlight_types),
                     vol.Required("add_another", default=True): bool,
                 }
             ),
@@ -146,6 +160,15 @@ class SmartHomeFarmingOptionsFlow(config_entries.OptionsFlow):
             count = int(bed[CONF_NAME].split()[-1])
             self._bed_count[bed_type] = max(self._bed_count[bed_type], count)
 
+    def _get_translated_types(self, type_translations):
+        """Get translated options based on user's language."""
+        # Get current language, fallback to English if not found
+        language = self.hass.config.language or "en"
+        language = language if language in type_translations else "en"
+        
+        # Create a dict of internal value to translated display value
+        return {k: type_translations[language][k] for k in type_translations[language]}
+
     async def async_step_init(self, user_input=None):
         """Manage the options."""
         return await self.async_step_add_bed()
@@ -154,11 +177,15 @@ class SmartHomeFarmingOptionsFlow(config_entries.OptionsFlow):
         """Handle adding a bed in options."""
         errors = {}
         
+        # Get translated options
+        bed_types = self._get_translated_types(BED_TYPE_TRANSLATIONS)
+        sunlight_types = self._get_translated_types(SUNLIGHT_TYPE_TRANSLATIONS)
+        
         if user_input is not None:
             if user_input.get("add_another", False):
                 bed_type = user_input[CONF_BED_TYPE]
                 self._bed_count[bed_type] += 1
-                name = f"{bed_type.replace('_', ' ').title()} {self._bed_count[bed_type]}"
+                name = f"{bed_types[bed_type]} {self._bed_count[bed_type]}"
                 
                 bed_data = {
                     CONF_NAME: name,
@@ -175,7 +202,7 @@ class SmartHomeFarmingOptionsFlow(config_entries.OptionsFlow):
                 if CONF_BED_TYPE in user_input:
                     bed_type = user_input[CONF_BED_TYPE]
                     self._bed_count[bed_type] += 1
-                    name = f"{bed_type.replace('_', ' ').title()} {self._bed_count[bed_type]}"
+                    name = f"{bed_types[bed_type]} {self._bed_count[bed_type]}"
                     
                     bed_data = {
                         CONF_NAME: name,
@@ -197,11 +224,11 @@ class SmartHomeFarmingOptionsFlow(config_entries.OptionsFlow):
             step_id="add_bed",
             data_schema=vol.Schema(
                 {
-                    vol.Required(CONF_BED_TYPE): vol.In(BED_TYPES),
+                    vol.Required(CONF_BED_TYPE): vol.In(bed_types),
                     vol.Required(CONF_LENGTH): vol.Coerce(int),
                     vol.Required(CONF_WIDTH): vol.Coerce(int),
                     vol.Required(CONF_COLD_FRAME, default=False): bool,
-                    vol.Required(CONF_SUNLIGHT): vol.In(SUNLIGHT_TYPES),
+                    vol.Required(CONF_SUNLIGHT): vol.In(sunlight_types),
                     vol.Required("add_another", default=True): bool,
                 }
             ),

@@ -1,0 +1,50 @@
+{
+    "config": {
+        "step": {
+            "user": {
+                "title": "Smart Home Farming Einrichtung",
+                "description": "Richten Sie Ihre Smart Home Farming Integration mit Ihrem Google Gemini API-Schlüssel und Gartenstandort ein.",
+                "data": {
+                    "api_key": "Google Gemini API-Schlüssel",
+                    "location": "Gartenstandort"
+                }
+            },
+            "add_bed": {
+                "title": "Gartenbeet hinzufügen",
+                "description": "Konfigurieren Sie Ihre Gartenbeete nacheinander. Sie haben derzeit {beds_count} Beet(e) konfiguriert. Fügen Sie ein weiteres Beet hinzu oder deaktivieren Sie 'Weiteres Beet hinzufügen', um die Einrichtung abzuschließen.",
+                "data": {
+                    "bed_type": "Beettyp",
+                    "length": "Länge (cm)",
+                    "width": "Breite (cm)",
+                    "cold_frame": "Mit Frühbeetaufsatz",
+                    "sunlight": "Sonneneinstrahlung",
+                    "add_another": "Weiteres Beet hinzufügen"
+                }
+            }
+        },
+        "error": {
+            "cannot_connect": "Verbindung fehlgeschlagen",
+            "invalid_auth": "Ungültige Authentifizierung",
+            "unknown": "Unerwarteter Fehler"
+        },
+        "abort": {
+            "already_configured": "Gerät ist bereits konfiguriert"
+        }
+    },
+    "options": {
+        "step": {
+            "add_bed": {
+                "title": "Gartenbeete bearbeiten",
+                "description": "Fügen Sie Gartenbeete hinzu oder bearbeiten Sie diese. Sie haben derzeit {beds_count} Beet(e) konfiguriert. Fügen Sie ein weiteres Beet hinzu oder deaktivieren Sie 'Weiteres Beet hinzufügen', um die Bearbeitung abzuschließen.",
+                "data": {
+                    "bed_type": "Beettyp",
+                    "length": "Länge (cm)",
+                    "width": "Breite (cm)",
+                    "cold_frame": "Mit Frühbeetaufsatz",
+                    "sunlight": "Sonneneinstrahlung",
+                    "add_another": "Weiteres Beet hinzufügen"
+                }
+            }
+        }
+    }
+}
